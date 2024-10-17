@@ -52,3 +52,48 @@ nice make -j`nproc`
 |Build device tree blobs|```make -j`nproc` dtbs```|
 
 * [Deploy the CompuLab Linux Kernel to CompuLab devices](https://github.com/compulab-yokneam/Documentation/blob/master/etc/linux_kernel_deployment.md#create-deb-package)
+
+
+
+## ES
+To Cross Compile:
+
+```bash
+export MACHINE=som-imx8m-plus
+
+export ARCH=arm64
+export CROSS_COMPILE=/opt/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-
+
+${CROSS_COMPILE}gcc --version
+
+
+
+```
+
+
+### Apply the default CompuLab config:
+
+```bash
+make ${MACHINE}_defconfig compulab.config
+```
+
+### Ussue menuconfig on order to change the default CompuLab configuration:
+
+```bash
+make menuconfig
+```
+
+### Build the kernel:
+
+```bash
+nice make -j`nproc`
+```
+
+### Builds' targets:
+
+| target | make command |
+| ------------------------- | ------------------------- |
+| Uncompressed kernel image | make -j`nproc` Image |
+| Build all modules | make -j`nproc` modules |
+| Build device tree blobs | make -j`nproc` dtbs |
+
